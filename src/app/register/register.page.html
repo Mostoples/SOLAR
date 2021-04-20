@@ -1,0 +1,69 @@
+
+<ion-content scrollY='false' style='z-index : 0; position : absolute; background: radial-gradient(ellipse at bottom, #1C2837 0%, #050608 100%);'>
+  <div style='position : absolute; width : 100vw; height : 100vh; '>
+    <div class='solar-syst'>
+      <div class='sun'></div>
+      <div class='mercury'></div>
+      <div class='venus'></div>
+      <div class='earth'></div>
+      <div class='mars'></div>
+      <div class='jupiter'></div>
+      <div class='saturn'></div>
+      <div class='uranus'></div>
+      <div class='neptune'></div>
+      <div class='pluto'></div>
+      <div class='asteroids-belt'></div>
+    </div>
+  </div>
+</ion-content>
+<ion-content style='z-index : 1000; display : block; --background: rgba(0,0,0,0.1)' scrollY='false'>
+  <ion-grid style='background : transparent'>
+    <ion-row justify-content-center style='background : transparent; margin-top : 50px;'>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" style='background : transparent'>
+        <ion-card style='background: radial-gradient(ellipse at bottom, rgba(	28, 40, 55, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%);  border-radius : 20px; box-shadow : 5px 5px 10px black;'>
+          <br>
+          <br>
+          <div text-center>
+            <h4 style='text-align : center; font-weight : bold; text-shadow : 2px 2px black; color : white'>Halaman Daftar Akun</h4>
+          </div>
+          <div padding>
+            <ion-item style='--background : transparent'>
+              <ion-input floating type="text" [(ngModel)]="fullname_input" placeholder="Nama"></ion-input>
+            </ion-item>
+            <a id='emailWarn' style='color : red; display : none'>E-mail sudah dipakai</a>
+            <ion-item style='--background : transparent'>
+              <ion-input type="email" [(ngModel)]="username_input" placeholder="Email"></ion-input>
+            </ion-item>
+            <ion-item style='--background : transparent'>
+              <ion-input type="password" [(ngModel)]="password_input" placeholder="Password"></ion-input>
+            </ion-item>
+            <a id='warningPassword' style='color : red; display : none'>Password tidak sama</a>
+            <ion-item style='--background : transparent'>
+              <ion-input type="password" [(ngModel)]="password_confirmation_input" placeholder="Konfirmasi Password"></ion-input>
+            </ion-item>
+            <br>
+            <a id='ceklist' style='color : red; display : none'>Mohon diceklist</a>
+            <ion-item style='--background: radial-gradient(ellipse at bottom, rgba(0, 106, 255, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%);  border-radius : 20px; box-shadow : 5px 5px 10px black;' class="checkbox_custom">
+                <ion-label style='color : white;'>Saya menyetujui kebijakan privasi dan perjanjian yang ada</ion-label>
+                <ion-checkbox (ionChange)="checked(); play()"></ion-checkbox>
+            </ion-item>
+          </div>
+          <br>
+          <div padding>
+            <ion-button size="medium" expand="block" (click)="register(); play();">Daftar</ion-button>
+          </div>
+          <br>
+          <br>
+          <div text-center>
+            <h6 style='text-align : center; font-weight : bold; text-shadow : 2px 2px black; color : white'>Sudah punya akun ?</h6>
+          </div>
+          <div padding>
+            <ion-button size="medium" expand="block" [routerLink]="['/login']" (click)='play()' >Masuk Akun</ion-button>
+          </div>
+          <br>
+          <br>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

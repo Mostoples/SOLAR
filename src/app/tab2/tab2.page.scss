@@ -1,0 +1,26 @@
+ion-toolbar {
+  --background: radial-gradient(ellipse at bottom, rgba(	28, 40, 55, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%), url('../../assets/img/bg.jpg') bottom no-repeat;
+}
+
+ion-slide {
+    height: calc(92vh); //83vh default
+    overflow-y: scroll;
+  }
+
+  
+p{
+  font-size : 3.6vw;
+}
+
+  
+
+  
+
+  
+  ion-title {
+    color: black;
+    font-family: 'Lobster', cursive;
+  }  
+
+  
+  

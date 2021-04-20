@@ -1,0 +1,433 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot='start'><ion-back-button defaultHref="/"></ion-back-button></ion-buttons>
+    <ion-segment  style='margin-left : 10vw;' (ionChange)="segmentChanged()" [(ngModel)]="segment" color="warning" scrollable>
+        <ion-segment-button value="0" (click)='play()'>
+          <ion-label>KARTU AR</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1" (click)='play()'>
+          <ion-label>PANDUAN</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+</ion-header>
+
+
+  
+
+
+<ion-content scrollY='false'>
+  
+
+   
+      <ion-menu side="start" menuId="first" contentId="content1" scrollY='false'>
+          <ion-toolbar>
+            <ion-title>Daftar Isi</ion-title>
+          </ion-toolbar>
+          <ion-content>
+			<div [ngSwitch]="choice">
+            <div *ngSwitchCase="1">
+            <ion-list>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(1,0)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Kover</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <!-- <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(2,0)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Operasi Hitung</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(3,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengertian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(3,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Penjumlahan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(4,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengurangan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(4,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Perkalian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(5,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pembagian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(6,0)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Pecahan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(7,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengertian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(8,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pecahan Murni</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(8,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pecahan Tak Murni</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(8,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pecahan Campuran</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(9,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pecahan Persen</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(9,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pecahan Desimal</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(10,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Penjumlahan Pecahan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(11,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengurangan Pecahan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(11,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Perkalian Pecahan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(12,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pembagian Pecahan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(13,0)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Bangun Datar</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(14,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengertian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(14,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Persegi</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(15,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Persegi Panjang</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(16,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Segitiga</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(17,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Jajar Genjang</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(18,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Trapesium</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(20,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Belah Ketupat</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(21,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Layang-layang</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(22,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Lingkaran</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(23,0)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Bangun Ruang</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(24,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengertian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(24,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Balok</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(25,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Prisma</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(26,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Ruang Bola</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(27,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Tabung</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(28,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Kubus</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(29,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Kerucut</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(30,0)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Limas</ion-label>
+              </ion-item>
+              </ion-menu-toggle> -->
+            </ion-list>
+			</div>
+			<div *ngSwitchCase="2">
+			<ion-list>
+              <!-- <ion-menu-toggle> 
+             <ion-item  (click)='ScrollToPoint(2,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Garis Besar Materi Manggala</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(13,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Timeline PKKMB</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+			  <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(14,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Formasi dan Flashmob</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(15,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Peraturan PKKMB</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(17,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Lagu Wajib Dihafal</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(23,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Materi Transformasi Menjadi Mahasiswa UNS</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(24,1)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Pengetahuan Kemahasiswaan</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(33,1)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Beasiswa</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(41,1)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Tips Menangani Homesick</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(43,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Materi Kepedulian Sosial</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(44,1)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>Self Awareness</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(45,1)' color='light' lines='none'>
+                  <ion-icon slot='start' name='md-arrow-dropright'></ion-icon><ion-icon slot='end' name='menu'></ion-icon><ion-label>How To Be Good Listener</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(46,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Ketentuan Pakaian</ion-label>
+              </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle>
+              <ion-item  (click)='ScrollToPoint(57,1)' color='light' lines='none'>
+                  <ion-icon slot='end' name='menu'></ion-icon><ion-label>Ketentuan Barang Bawaan</ion-label>
+              </ion-item>
+              </ion-menu-toggle> -->
+              
+              
+             
+            </ion-list>
+			</div>
+			</div>
+          </ion-content>
+      </ion-menu>
+
+
+
+
+
+      <ion-router-outlet id="content1"></ion-router-outlet>
+	  <ion-router-outlet id="content2"></ion-router-outlet>
+      
+      
+      <ion-slides  pager='true' direction='vertical' #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
+         
+          <ion-slide>
+              <ion-content  #content [scrollEvents]='true'> 
+                <ion-fab vertical="top" horizontal="end" slot="fixed" style='display : none'>
+                  <ion-fab-button >
+                    <ion-menu-button (click)='play()'><ion-icon name='menu' (click)='firstUse()'></ion-icon></ion-menu-button>
+                  </ion-fab-button>
+                </ion-fab>
+                <ion-card style=' margin-left : 0vw; margin-top : 0vw; margin-right : 0vw; margin-bottom : 0vw; margin-inline-start: 0vw; margin-inline-end: 0vw; padding-left : 0vw; padding-top : 0vw; padding-right : 0vw; padding-bottom : 0vw;'>
+                  <ion-card-content style='margin-left : 0vw; margin-top : 0vw; margin-right : 0vw; margin-bottom : 0vw; margin-inline-start: 0vw; margin-inline-end: 0vw; padding-left : 0vw; padding-top : 0vw; padding-right : 0vw; padding-bottom : 0vw;'>
+                    <ion-list style=' margin-left : 0vw; margin-top : 0vw; margin-right : 0vw; margin-bottom : 0vw; margin-inline-start: 0vw; margin-inline-end: 0vw; padding-left : 0vw; padding-top : 0vw; padding-right : 0vw; padding-bottom : 0vw;'>
+<!-- ION ITEM MABA 1 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img #maba1 style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/1.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/2.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/3.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/4.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/5.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/6.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/7.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/8.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/9.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/10.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/11.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/12.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/13.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/14.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="../../assets/materi/15.jpg" tappable >
+                        </div>
+                      </ion-item>
+                    </ion-list>
+                  </ion-card-content>
+                </ion-card>
+              </ion-content>
+          </ion-slide>
+          <ion-slide>
+              <ion-content #content2 > 
+                  <ion-fab vertical="top" horizontal="end" slot="fixed">
+                  <ion-fab-button style='display : none' >
+                    <ion-menu-button (click)='play()'><ion-icon name='menu' (click)='firstUse()'></ion-icon></ion-menu-button>
+                  </ion-fab-button>
+                </ion-fab>
+                <ion-card style=' margin-left : 0vw; margin-top : 0vw; margin-right : 0vw; margin-bottom : 0vw; margin-inline-start: 0vw; margin-inline-end: 0vw; padding-left : 0vw; padding-top : 0vw; padding-right : 0vw; padding-bottom : 0vw;'>
+                  <ion-card-content style='margin-left : 0vw; margin-top : 0vw; margin-right : 0vw; margin-bottom : 0vw; margin-inline-start: 0vw; margin-inline-end: 0vw; padding-left : 0vw; padding-top : 0vw; padding-right : 0vw; padding-bottom : 0vw;'>
+                    <ion-list style=' margin-left : 0vw; margin-top : 0vw; margin-right : 0vw; margin-bottom : 0vw; margin-inline-start: 0vw; margin-inline-end: 0vw; padding-left : 0vw; padding-top : 0vw; padding-right : 0vw; padding-bottom : 0vw;'>
+<!-- ION ITEM MABA 1 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img #kambing1 style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="assets/panduan/1.jpg" tappable >
+                        </div>
+                      </ion-item>
+                      <ion-item style='--padding-start: 0;   --inner-padding-end: 0;'>
+                        <div style='width : 100vw; height : 141vw; background : black; '>
+                          <img #kambing1 style='height : 100%; width: 100%; position : absolute; top : 0; left : 0;' src="assets/panduan/2.jpg" tappable >
+                        </div>
+                      </ion-item>
+                    </ion-list>
+                  </ion-card-content>
+                </ion-card>
+              </ion-content>
+          </ion-slide>
+        
+      </ion-slides>
+      
+  
+    
+</ion-content>

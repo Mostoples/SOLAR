@@ -1,0 +1,45 @@
+
+<ion-content scrollY='false' style='z-index : 0; position : absolute; background: radial-gradient(ellipse at bottom, #1C2837 0%, #050608 100%);'>
+  <div style='position : absolute; width : 100vw; height : 100vh; '>
+    <div class='solar-syst'>
+      <div class='sun'></div>
+      <div class='mercury'></div>
+      <div class='venus'></div>
+      <div class='earth'></div>
+      <div class='mars'></div>
+      <div class='jupiter'></div>
+      <div class='saturn'></div>
+      <div class='uranus'></div>
+      <div class='neptune'></div>
+      <div class='pluto'></div>
+      <div class='asteroids-belt'></div>
+    </div>
+  </div>
+</ion-content>
+<ion-content style='z-index : 1000; display : block; --background: rgba(0,0,0,0.1)' scrollY='false'>
+  <ion-grid style='background : transparent'>
+    <ion-row justify-content-center style='background : transparent; margin-top : 100px;'>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" style='background : transparent'>
+        <ion-card style='background: radial-gradient(ellipse at bottom, rgba(	28, 40, 55, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%); border-radius : 20px; box-shadow : 5px 5px 10px black;'>
+          <br>
+          <br>
+          <div text-center>
+            <h4 style='text-align : center; font-weight : bold; text-shadow : 2px 2px black; color : white'>Halaman Aktivasi Akun</h4>
+          </div>
+          <div text-center>
+            <h6 style='text-align : center; font-weight : bold; text-shadow : 2px 2px black; color : white'>Cek email anda untuk mendapatkan kode aktivasi</h6>
+          </div>
+          <div padding>
+            <ion-item style='--background : transparent'>
+              <ion-input [(ngModel)]="number_input" type="text" placeholder="Kode Verifikasi"></ion-input>
+            </ion-item>
+          </div>
+          <br>
+          <div padding>
+            <ion-button size="medium" expand="block" (click)="activate(); play();">Aktifkan</ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

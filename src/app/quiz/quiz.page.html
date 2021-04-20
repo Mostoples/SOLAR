@@ -1,0 +1,261 @@
+<style>
+  p{
+    color : white;
+    padding-right : 10px;
+  }
+  ion-label{
+    color : white;
+    padding-right : 10px;
+  }
+
+  h5{
+    color : white;
+    padding-right : 10px;
+  }
+  label{
+    color : white;
+    margin-left : 4vw;
+   
+  }
+
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  li{
+    color : white;
+  }
+  
+  input {
+    margin-bottom : 4vw;
+    margin-left : 2vw;
+  }
+
+  input[type='radio'] {
+    transform: scale(2);
+}
+</style>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot='start'><ion-back-button defaultHref="/"></ion-back-button></ion-buttons>
+    <ion-title style='text-align : center;'>
+      Latihan Soal
+    </ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content scrollY='false' style='z-index : 0; position : absolute; background: radial-gradient(ellipse at bottom, #1C2837 0%, #050608 100%);'>
+  <div style='position : absolute; width : 100vw; height : 100vh; '>
+    <div class='solar-syst'>
+      <div class='sun'></div>
+      <div class='mercury'></div>
+      <div class='venus'></div>
+      <div class='earth'></div>
+      <div class='mars'></div>
+      <div class='jupiter'></div>
+      <div class='saturn'></div>
+      <div class='uranus'></div>
+      <div class='neptune'></div>
+      <div class='pluto'></div>
+      <div class='asteroids-belt'></div>
+    </div>
+  </div>
+</ion-content>
+<div style='position: sticky; z-index : 1; background : url(assets/img/bg2.png); background-size : cover; position : absolute; width : 100vw; height : 100vh;'></div>
+<div style='position: sticky; z-index : 2; background : rgba(0,0,0,0.5); background-size : cover; position : absolute; width : 100vw; height : 100vh;'></div>
+<ion-content style='color : white; text-align : justify; z-index : 1000;  --background : transparent'>
+ 
+        <ion-content  #content [scrollEvents]='true' style='--background: transparent; color : white; text-align : justify;'> 
+          <ion-fab>
+            <ion-row>
+              <ion-col class="ion-margin-top" size-md="6" offset-md="3" style='text-align : center;'> 
+                  <ion-label style=" font-weight: bold; font-size: 25px; text-align : center; display : inline;" >Latihan Soal</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-md="6" offset-md="3"> 
+                  <p><b>Pilihlah salah satu jawaban yg paling tepat!</b></p>
+                    <div style='width : 100vw; height: 70vw; background-size : cover;'>
+                      <img src="assets/img/latposrak1.png">
+                    </div>
+                    
+                    <!--  -------------------------------------------------------------------------------------------------------   -->
+                    <div id='soal1' style='background : rgba(0,0,0,0)'>
+                      <p>
+                        1.	SOAL NOMOR 1
+                      </p>
+                      <div id='pilihana1' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal1" value="a">
+                        <label style='color : white' for="a">a.	Pilihan A</label><br>
+                      </div>
+                      <div id='pilihanb1' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal1" value="b">
+                        <label for="b">b.	Pilihan B</label><br>
+                      </div>
+                      <div class='benar' id='pilihanc1' style='display : flex; flex-wrap : wrap; background :rgba(0,0,0,0)'>
+                        <input type="radio" name="soal1" id='benar1' value="c">
+                        <label for="c">c.	Pilihan C</label><br>
+                      </div>
+                      <div id='pilihand1' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal1" value="d">
+                        <label for="d">d.	Pilihan D</label><br>
+                      </div>
+
+                      <div id='danger1' style='display : none; background : rgba(255,0,0,0.8); width : 100%; color : white; font-weight: bold; text-align : center;'><span>Salah</span></div>
+                    </div>
+                    <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <div id='soal2' style='background : rgba(0,0,0,0)'>
+                      <p>
+                        2.	SOAL NOMOR 2
+                      </p>
+                      <div id='pilihana2' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal2" value="a">
+                        <label for="a">a. Pilihan A</label><br>
+                      </div>
+                      <div class='benar' id='pilihanb2' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal2" id='benar2' value="b">
+                        <label for="b">b.	Pilihan B</label><br>
+                      </div>
+                      <div id='pilihanc2' style='display : flex; flex-wrap : wrap; background :rgba(0,0,0,0)'>
+                        <input type="radio" name="soal2" value="c">
+                        <label for="c">c.	Pilihan C</label><br>
+                      </div>
+                      <div id='pilihand2' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal2" value="d">
+                        <label for="d">d.	Pilihan D</label><br>
+                      </div>
+                      <div id='danger2' style='display : none; background : rgba(255,0,0,0.8); width : 100%; color : white; font-weight: bold; text-align : center;'><span>Salah</span></div>
+                    </div>
+                    <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <div id='soal3' style='background : rgba(0,0,0,0)'>
+                      <p>
+                        3.	SOAL NOMOR 3
+                      </p>
+                      <div id='pilihana3' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal3" value="a">
+                        <label for="a">a.	Pilihan A</label><br>
+                      </div>
+                      <div id='pilihanb3' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal3" value="b">
+                        <label for="b">b.	Pilihan B</label><br>
+                      </div>
+                      <div id='pilihanc3' style='display : flex; flex-wrap : wrap; background :rgba(0,0,0,0)'>
+                        <input type="radio" name="soal3" value="c">
+                        <label for="c">c.	Pilihan C</label><br>
+                      </div>
+                      <div class='benar' id='pilihand3' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal3" id='benar3' value="d">
+                        <label for="d">d.	Pilihan D</label><br>  
+                      </div>
+
+                      <div id='danger3' style='display : none; background : rgba(255,0,0,0.8); width : 100%; color : white; font-weight: bold; text-align : center;'><span>Salah</span></div>
+                    </div>
+                    <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <!--  -------------------------------------------------------------------------------------------------------   -->
+                    <div id='soal4' style='background : rgba(0,0,0,0)'>
+                      <p>
+                        4.	SOAL NOMOR 4
+                      </p>
+                      <div id='pilihana4' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal4" value="a">
+                        <label for="a">a.	Pilihan A</label><br>
+                      </div>
+                      <div id='pilihanb4' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal4" value="b">
+                        <label for="b">b.	Pilihan B</label><br>
+                      </div>
+                      <div class='benar' id='pilihanc4' style='display : flex; flex-wrap : wrap; background :rgba(0,0,0,0)'>
+                        <input type="radio" name="soal4" id='benar4' value="c">
+                        <label for="c">c.	Pilihan C</label><br>
+                      </div>
+                      <div id='pilihand4' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal4" value="d">
+                        <label for="d">d.	Pilihan D</label><br>  
+                      </div>
+
+                      <div id='danger4' style='display : none; background : rgba(255,0,0,0.8); width : 100%; color : white; font-weight: bold; text-align : center;'><span>Salah</span></div>
+                    </div>
+                    <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <!--  -------------------------------------------------------------------------------------------------------   -->
+                     <div id='soal5' style='background : rgba(0,0,0,0)'>
+                      <p>
+                        5. SOAL NOMOR 5
+                      </p>
+                      <div style='width : 100vw; height: 50vw; background-size : cover;'>
+                        <img src="assets/img/latposrak2.png">
+                      </div>
+                      <p>
+                       SOAL NOMOR 5
+                      </p>
+                      <div id='pilihana5' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal5" value="a">
+                        <label for="a">a.	Pilihan A</label><br>
+                      </div>
+                      <div id='pilihanb5' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal5" value="b">
+                        <label for="b">a.	Pilihan B</label><br>
+                      </div>
+                      <div class='benar' id='pilihanc5' style='display : flex; flex-wrap : wrap; background :rgba(0,0,0,0)'>
+                        <input type="radio" name="soal5" id='benar5' value="c">
+                        <label for="c">c.	Pilihan C</label><br>
+                      </div>
+                      <div id='pilihand5' style='display : flex; flex-wrap : wrap; background : rgba(0,0,0,0)'>
+                        <input type="radio" name="soal5" value="d">
+                        <label for="d">d.	Pilihan D</label><br> 
+                      </div>
+                      <div id='danger5' style='display : none; background : rgba(255,0,0,0.8); width : 100%; color : white; font-weight: bold; text-align : center;'><span>Salah</span></div>
+                    </div>
+                    <!--  -------------------------------------------------------------------------------------------------------   -->
+
+                    <div id='skorBox' style='display : none; border-radius : 20px; background: linear-gradient(to right, #28636d, #65c7f7, #0052d4);  width : 80vw; height : 20vw; margin : auto;'>
+                      <p style='margin-top : 1vw; font-size : 6vw; color : white; text-align : center; font-weight: bold;'>
+                        SKOR
+                      </p>
+                      <p id='skor' style=' font-size : 6vw; color : white; text-align : center; font-weight: bold;'>
+                        
+                      </p>
+                     
+                    </div>
+
+                    <ion-col class="ion-margin-top" id='evalButton' style='background: radial-gradient(ellipse at bottom, rgba(	28, 40, 55, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%), url(../../assets/img/bg.jpg) bottom no-repeat;'> 
+                      <ion-button  (click)='reveal()' class='s2' expand='block' style='height : 20vh; margin : auto; width : 60vw; --background: radial-gradient(ellipse at bottom, rgba(	28, 40, 55, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%), url(../../assets/img/bg.jpg) bottom no-repeat;'>
+                        <ion-label>
+                          <div style='margin : auto;  background : url(assets/img/key.png); width : 20vw; height : 20vw; background-size : cover;'></div>
+                         
+                          <div style='margin-top : 2vw; color : white; ' >Evaluasi</div>
+                        </ion-label>
+                      </ion-button>
+                    </ion-col>
+
+                    <div style='visibility : hidden'>
+                    <p><b>Kunci Jawaban : </b></p>
+                    <div id='reveal' style='display : none;'>
+                      <ol type='1'>
+                        <li>C</li>
+                        <li>B</li>
+                        <li>D</li>
+                        <li>C</li>
+                        <li>C</li>
+                      </ol>
+                    </div>
+                  </div>
+                    
+                  </ion-col>
+            </ion-row>
+            
+            
+          </ion-fab>
+        
+        </ion-content>
+         
+
+  
+  
+  
+</ion-content>

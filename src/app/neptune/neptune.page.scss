@@ -1,0 +1,33 @@
+ion-toolbar {
+    --background: radial-gradient(ellipse at bottom, rgba(	28, 40, 55, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%), url('../../assets/img/bg.jpg') bottom no-repeat;
+  }
+  
+
+  ion-item {
+    --background : transparent;
+    color : white;
+}
+
+
+ion-label{
+    font-weight : bold;
+}
+
+ion-icon{
+    color : white;
+}
+
+.tabs-md .tab-button {
+    color: #FFC400 !important;
+   }
+  
+   .tabs-md .tab-button[aria-selected=true] {
+     color: #DD2C00 !important;
+   }
+
+   .ripple-parent {
+    position: relative;
+    overflow: hidden;
+    --ripple-color : yellow;
+    
+  }

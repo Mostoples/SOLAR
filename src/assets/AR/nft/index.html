@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="libs/three.js"></script>
+   
+    <script type="text/javascript" src="libs/tween.min.js"></script>
+
+
+    <script type="text/javascript" src="libs/Sparks.js"></script>
+</head>
+<body>
+
+	<!-- Div which will hold the Output -->
+	<div id="WebGL-output">
+	</div>
+	<script type="x-shader/x-vertex" id="vertexshader">
+
+				attribute float size;
+				attribute vec3 pcolor;
+
+				varying vec3 vColor;
+
+				void main() {
+
+					vColor = pcolor;
+
+					vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+					gl_PointSize = size * ( 200.0 / length( mvPosition.xyz ) );
+
+					gl_Position = projectionMatrix * mvPosition;
+
+				}
+
+	</script>
+
+	<script type="x-shader/x-fragment" id="fragmentshader">
+
+				uniform sampler2D texture;
+
+				varying vec3 vColor;
+
+				void main() {
+
+					vec4 outColor = texture2D( texture, gl_PointCoord );
+
+					gl_FragColor = outColor * vec4( vColor, 1.0 );
+
+				}
+
+	</script>
+
+
+
+
+	<script type="text/javascript">
+	 
+	    	function createSphere(radius,width,height,color,x,y,z){
+				var sphereGeometry = new THREE.SphereGeometry(radius,width,height);
+		        var sphereMaterial = new THREE.MeshPhongMaterial({
+		        	map: color, color: 0xFFFFFF
+		        });
+		        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+		        sphere.position.x=x;
+		        sphere.position.y=y;
+		        sphere.position.z=z;
+		        return sphere;
+			}
+	    	var scene = new THREE.Scene();
+	    	var clock = new THREE.Clock();
+	        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+	        var renderer = new THREE.WebGLRenderer();
+	        renderer.setClearColor(new THREE.Color(0x000000),1.0);
+	        renderer.setSize(window.innerWidth, window.innerHeight);
+	        renderer.shadowMapEnabled = true;
+        
+			camera.position.x = -41; 
+	        camera.position.y = 55;
+	        camera.position.z = 85;
+	        camera.lookAt(scene.position);
+	        var Pool = {
+					__pools: [],
+					get: function() {
+						if ( this.__pools.length > 0 ) {
+							return this.__pools.pop();
+						}
+						console.log( "pool ran out!" )
+						return null;
+					},
+					add: function( v ) {
+						this.__pools.push( v );
+					}
+				};
+
+			function generateSprite() {
+				var canvas = document.createElement('canvas');
+				canvas.width = 16;
+				canvas.height = 16;
+				var context = canvas.getContext('2d');
+				var gradient = context.createRadialGradient(
+				canvas.width / 2, canvas.height / 2,
+				0,
+				canvas.width / 2, canvas.height / 2,
+				canvas.width / 2);
+				gradient.addColorStop(0, 'rgba(255,255,255,1)');
+				gradient.addColorStop(0.2, 'rgba(0,255,255,1)');
+				gradient.addColorStop(0.4, 'rgba(0,0,64,1)');
+				gradient.addColorStop(1, 'rgba(0,0,0,1)');
+				context.fillStyle = gradient;
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				var texture = new THREE.Texture(canvas);
+				texture.needsUpdate = true;
+				return texture;
+				}
+
+	        var smokeParticles = new THREE.Geometry;
+			console.log(smokeParticles);
+			for (var i = 0; i < 70000; i++) {
+			    var particle = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 20, Math.random() * 2 - 1);
+			    smokeParticles.vertices.push(particle);
+			    Pool.add( i);
+			}
+
+			//material particles
+			var attributesParticle = {
+
+					size:  { type: 'f', value: [] },
+					pcolor: { type: 'c', value: [] }
+
+				};
+
+				var sprite = generateSprite() ;
+
+				var uniformsParticle = {
+
+					texture:   { type: "t", value: THREE.ImageUtils.loadTexture("assets/planets/Smoke.png") }
+
+				};
+
+			var material = new THREE.ShaderMaterial( {
+
+					uniforms: uniformsParticle,
+					attributes: attributesParticle,
+
+					vertexShader: document.getElementById( 'vertexshader' ).textContent,
+					fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+
+					blending: THREE.AdditiveBlending,
+					depthWrite: false,
+					transparent: true
+
+				});
+
+			
+			var smoke = new THREE.PointCloud(smokeParticles, material);
+			var vertices = smoke.geometry.vertices;
+			var values_size = attributesParticle.size.value;
+			var values_color = attributesParticle.pcolor.value;
+			for( var v = 0; v < vertices.length; v ++ ) {
+				values_size[ v ] = 100;
+
+				values_color[ v ] = new THREE.Color( 0xFFFFFF );
+
+				smokeParticles.vertices[ v ].set( Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY );
+
+			}
+			scene.add(smoke);
+
+			
+
+			var setTargetParticle = function() {
+
+					var target = Pool.get();
+					
+
+					return target;
+
+			};
+			var hue = 0;
+			var onParticleCreated = function( p ) {
+
+					var position = p.position;
+					p.target.position = position;
+
+					var target = p.target;
+
+					if ( target ) {
+						hue += 0.0003 * 1;
+						if ( hue > 1 ) hue -= 1;
+
+						values_color[ target ].setHSL( hue, 0.6, 0.1 );
+						smokeParticles.vertices[ target ] = p.position;
+
+					};
+
+			};
+
+			var onParticleDead = function( particle ) {
+				var target = particle.target;
+				if ( target ) {
+					values_color[ target ].setRGB( 1, 1, 1 );
+					smokeParticles.vertices[ target ].set( Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY );
+					Pool.add( particle.target );
+				}
+			};
+
+			var counter    = new SPARKS.SteadyCounter( 500 );
+			var emitter   = new SPARKS.Emitter( counter );
+			emitterpos = new THREE.Vector3( 0, 0, 0 );
+			emitter.addInitializer( new SPARKS.Position( new SPARKS.PointZone( emitterpos ) ) );
+			emitter.addInitializer( new SPARKS.Lifetime( 1, 1 ));
+			emitter.addInitializer( new SPARKS.Target( null, setTargetParticle ) );
+			var vector = new THREE.Vector3( 0, 0, 0.3 );
+			emitter.addInitializer( new SPARKS.Velocity( new SPARKS.PointZone( vector ) ) );
+			emitter.addAction( new SPARKS.Age() );
+			emitter.addAction( new SPARKS.Accelerate( 0, 0, -20 ) );
+			emitter.addAction( new SPARKS.Move() );
+			emitter.addAction( new SPARKS.RandomDrift( 40, 40, 200 ) );
+			emitter.addCallback( "created", onParticleCreated );
+			emitter.addCallback( "dead", onParticleDead );
+			var cometInitRun = false;
+			emitter.start();
+
+			var activeCam = 1;
+
+			document.getElementById('WebGL-output').append(renderer.domElement);
+
+	        renderScene();
+
+	        function renderScene(){
+	        	var delta = clock.getDelta();
+	        	smoke.geometry.verticesNeedUpdate = true;
+				attributesParticle.size.needsUpdate = true;
+				attributesParticle.pcolor.needsUpdate = true;
+	        	requestAnimationFrame(renderScene);
+	        	if (activeCam == 1) {
+	        
+	        		renderer.render(scene, camera);	
+	        	}
+	        }
+
+
+
+
+	    	
+
+	
+
+	</script>
+</body>
+</html>

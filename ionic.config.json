@@ -1,0 +1,7 @@
+{
+  "name": "SOLAR",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

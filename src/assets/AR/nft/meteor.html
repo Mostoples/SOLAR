@@ -1,0 +1,522 @@
+<html>
+<head>
+<title>NFT marker example with Three.js</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<style>
+html,body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	text-align: center;
+	overflow-x: hidden;
+}
+
+input{
+
+background: transparent; 
+border : none; 
+color : white;
+font-size : 20px;
+font-weight : bold;
+}
+	.positionCameras ul, .positionCameras li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    vertical-align:top;
+}
+.positionCameras li.cameraLeft, .positionCameras li.cameraIcon, .positionCameras li.cameraRight {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background: #cccccc;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #aaaaaa;
+    box-shadow: 1px 2px 15px #cccccc;
+    text-align:center;
+    line-height:20px;
+}
+.positionCameras li.cameraLeft:before {
+    content:"";
+    display:inline-block;
+    width: 0;
+    height: 0;
+    vertical-align:middle;
+	margin-top : 10px;
+    border-style: solid;
+    border-width: 0 5px 10px 5px;
+    border-color: transparent transparent #007bff transparent;
+}
+.positionCameras li.cameraIcon {
+    cursor: default;
+}
+.positionCameras li.cameraRight:before {
+    content:'';
+    display:inline-block;
+    vertical-align:middle;
+    width: 0;
+    height: 0;
+	margin-top : 10px;
+    border-style: solid;
+    border-width: 8.7px 5px 0 5px;
+    border-color: #007bff transparent transparent transparent;
+}
+.cameraIcon:before {
+    content:'';
+    display:inline-block;
+    vertical-align:middle;
+    height:10px;
+    width:10px;
+
+    border-radius:100%;
+    box-shadow:0 0 0 3px gray, inset -1px -1px 0 3px black;
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: -30px;
+  right: 30px;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+</style>
+</head>
+<body>
+<div style='display : none; position : absolute; top : 10px; right : 10px; width : 60px; height : 60px; background : rgba(0,0,0,0.8); z-index : 10000; border-radius : 10px; display : block; transition : all 1s;' id='blok1'>
+	<div style='font-weight : bold; color : white; text-align : center; width : 60px '>Animasi</div>
+	<label class="switch" style='position : absolute; top : 20px;'>
+		<input type="checkbox" onchange='setanim()'>
+		<span class="slider round"></span>
+	</label>	  
+</div>
+<div style='display : none; position : absolute; width : 70px; height : 80px; background : transparent; top : 0; z-index : 10000;'>
+	<div class="positionCameras">
+		<ul>
+			<li title="Move Up" onclick="up()" class="cameraLeft" id="cameraUp" style='position : absolute; top : 0px; margin-top : 10px; z-index : 10000000'></li>
+			<div style='position : absolute; padding-right : 10px; right : 0; top : 0; bottom : 0; background : transparent; width : 80px; height : auto; font-weight : bold; text-align : center; font-size : 30px; color : white; vertical-align: middle; display: flex; justify-content: center; align-items: center;'>S</div>
+			<li title="Move Down" onclick="down()" class="cameraRight" id="cameraDown" style='position : absolute; top :40px; margin-top : 10px;  z-index : 10000000'></li>
+		</ul>
+	</div>
+</div>
+<script src="../resources/jsartoolkit5/standard/artoolkit.min.js"></script>
+<script src="../resources/three.js"></script>
+<script src="../resources/jsartoolkit5/artoolkit/artoolkit.three.js"></script>
+<script src='threex/threex.planets.js'></script>
+<script src='threex/threex.atmospherematerial.js'></script>
+<!-- <script src='threex/vendor/three.js/examples/js/libs/dat.gui.min.js'></script> -->
+<script src="threex/threex.atmospheredatgui.js"></script>
+<script type="text/javascript" src="libs/three.js"></script>
+   
+<script type="text/javascript" src="libs/tween.min.js"></script>
+
+
+<script type="text/javascript" src="libs/Sparks.js"></script>
+<script type="x-shader/x-vertex" id="vertexshader">
+
+	attribute float size;
+	attribute vec3 pcolor;
+
+	varying vec3 vColor;
+
+	void main() {
+
+		vColor = pcolor;
+
+		vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+		gl_PointSize = size * ( 200.0 / length( mvPosition.xyz ) );
+
+		gl_Position = projectionMatrix * mvPosition;
+
+	}
+
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentshader">
+
+	uniform sampler2D texture;
+
+	varying vec3 vColor;
+
+	void main() {
+
+		vec4 outColor = texture2D( texture, gl_PointCoord );
+
+		gl_FragColor = outColor * vec4( vColor, 1.0 );
+
+	}
+
+</script>
+
+<script>
+		var containerEarth;
+	var anim;
+	var once = false;
+window.ARThreeOnLoad = function() {
+
+	ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: '../resources/data/camera_para-iPhone 5 rear 640x480 1.0m.dat',
+	onSuccess: function(arScene, arController, arCamera) {
+		
+		document.body.className = arController.orientation;
+
+		var renderer = new THREE.WebGLRenderer({antialias: true,
+			logarithmicDepthBuffer: true
+		});
+		renderer.gammaOutput = true;
+		renderer.gammaFactor = 2.2;
+
+
+
+		renderer.setSize(arController.videoWidth, arController.videoHeight);
+		renderer.domElement.style.transform = 'rotate(-90deg) '
+		renderer.domElement.style.position = 'absolute';
+		renderer.domElement.style.top = '80px';
+		renderer.domElement.style.left = '-90px';
+		console.log(renderer);
+		// document.body.className += ' desktop';
+		document.body.insertBefore(renderer.domElement, document.body.firstChild);
+
+		var rotationV = 0;
+		var rotationTarget = 0;
+
+		renderer.domElement.addEventListener('click', function(ev) {
+			ev.preventDefault();
+			rotationTarget += 1;
+		}, false);
+
+		var light	= new THREE.DirectionalLight( 0xffffff, 1 )
+		light.position.set(5,5,5)
+		arScene.scene.add( light )
+		light.castShadow	= true
+		light.shadowCameraNear	= 0.01
+		light.shadowCameraFar	= 15
+		light.shadowCameraFov	= 45
+
+		light.shadowCameraLeft	= -1
+		light.shadowCameraRight	=  1
+		light.shadowCameraTop	=  1
+		light.shadowCameraBottom= -1
+		// light.shadowCameraVisible	= true
+
+		light.shadowBias	= 0.001
+		light.shadowDarkness	= 0.2
+
+		light.shadowMapWidth	= 1024
+		light.shadowMapHeight	= 1024
+
+		arScene.scene.add(light);
+
+		containerEarth	= new THREE.Object3D()
+		containerEarth.rotateZ(-23.4 * Math.PI/180)
+		containerEarth.position.z	= 0
+	
+
+
+		// var earthMesh	= THREEx.Planets.createMoon()
+		// earthMesh.receiveShadow	= true
+		// earthMesh.castShadow	= true
+		// containerEarth.add(earthMesh)
+
+
+		function createSphere(radius,width,height,color,x,y,z){
+				var sphereGeometry = new THREE.SphereGeometry(radius,width,height);
+		        var sphereMaterial = new THREE.MeshPhongMaterial({
+		        	map: color, color: 0xFFFFFF
+		        });
+		        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+		        sphere.position.x=x;
+		        sphere.position.y=y;
+		        sphere.position.z=z;
+		        return sphere;
+			}
+		
+			var Pool = {
+					__pools: [],
+					get: function() {
+						if ( this.__pools.length > 0 ) {
+							return this.__pools.pop();
+						}
+						console.log( "pool ran out!" )
+						return null;
+					},
+					add: function( v ) {
+						this.__pools.push( v );
+					}
+				};
+
+			function generateSprite() {
+				var canvas = document.createElement('canvas');
+				canvas.width = 16;
+				canvas.height = 16;
+				var context = canvas.getContext('2d');
+				var gradient = context.createRadialGradient(
+				canvas.width / 2, canvas.height / 2,
+				0,
+				canvas.width / 2, canvas.height / 2,
+				canvas.width / 2);
+				gradient.addColorStop(0, 'rgba(211, 84, 0, 1)');
+				gradient.addColorStop(1, 'rgba(243, 156, 18, 1)');
+				context.fillStyle = gradient;
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				var texture = new THREE.Texture(canvas);
+				texture.needsUpdate = true;
+				return texture;
+				}
+
+	        var smokeParticles = new THREE.Geometry;
+			console.log(smokeParticles);
+			for (var i = 0; i < 70000; i++) {
+			    var particle = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 20, Math.random() * 2 - 1);
+			    smokeParticles.vertices.push(particle);
+			    Pool.add( i);
+			}
+
+			//material particles
+			var attributesParticle = {
+
+					size:  { type: 'f', value: [] },
+					pcolor: { type: 'c', value: [] }
+
+				};
+
+				var sprite = generateSprite() ;
+
+				var uniformsParticle = {
+
+					texture:   { type: "t", value: THREE.ImageUtils.loadTexture("assets/planets/Smoke.png") }
+
+				};
+
+			var material = new THREE.ShaderMaterial( {
+
+					uniforms: uniformsParticle,
+					attributes: attributesParticle,
+
+					vertexShader: document.getElementById( 'vertexshader' ).textContent,
+					fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+
+					blending: THREE.AdditiveBlending,
+					depthWrite: false,
+					transparent: true
+
+				});
+
+			
+			var smoke = new THREE.PointCloud(smokeParticles, material);
+			var vertices = smoke.geometry.vertices;
+			var values_size = attributesParticle.size.value;
+			var values_color = attributesParticle.pcolor.value;
+			for( var v = 0; v < vertices.length; v ++ ) {
+				values_size[ v ] = 600;
+
+				values_color[ v ] = new THREE.Color( 0xFFFFFF );
+
+				smokeParticles.vertices[ v ].set( Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY );
+
+			}
+			containerEarth.add(smoke);
+
+			
+
+			var setTargetParticle = function() {
+
+					var target = Pool.get();
+					
+
+					return target;
+
+			};
+			var hue = 11;
+			var onParticleCreated = function( p ) {
+
+					var position = p.position;
+					p.target.position = position;
+
+					var target = p.target;
+
+					if ( target ) {
+						// hue += 0.0003 * 1;
+						if ( hue > 1 ) hue -= 1;
+
+						values_color[ target ].setHSL( hue, 0.6, 0.1 );
+						smokeParticles.vertices[ target ] = p.position;
+
+					};
+
+			};
+
+			var onParticleDead = function( particle ) {
+				var target = particle.target;
+				if ( target ) {
+					values_color[ target ].setRGB( 1, 1, 1 );
+					smokeParticles.vertices[ target ].set( Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY );
+					Pool.add( particle.target );
+				}
+			};
+
+			var counter    = new SPARKS.SteadyCounter( 500 );
+			var emitter   = new SPARKS.Emitter( counter );
+			emitterpos = new THREE.Vector3( 0, 0, 0 );
+			emitter.addInitializer( new SPARKS.Position( new SPARKS.PointZone( emitterpos ) ) );
+			emitter.addInitializer( new SPARKS.Lifetime( 1, 1 ));
+			emitter.addInitializer( new SPARKS.Target( null, setTargetParticle ) );
+			var vector = new THREE.Vector3( 0, 0, 0.3 );
+			emitter.addInitializer( new SPARKS.Velocity( new SPARKS.PointZone( vector ) ) );
+			emitter.addAction( new SPARKS.Age() );
+			emitter.addAction( new SPARKS.Accelerate( 0, 0, -20 ) );
+			emitter.addAction( new SPARKS.Move() );
+			emitter.addAction( new SPARKS.RandomDrift( 40, 40, 200 ) );
+			emitter.addCallback( "created", onParticleCreated );
+			emitter.addCallback( "dead", onParticleDead );
+			var cometInitRun = false;
+			emitter.start();
+
+
+
+		containerEarth.position.z = 0;
+		containerEarth.position.x = 180;
+		containerEarth.position.y = 180;
+		containerEarth.scale.set(80,80,80);
+		
+
+
+		containerEarth.rotateY(90);
+
+		arController.loadNFTMarker('../resources/dataNFT/meteor', function(markerId) {
+			var markerRoot = arController.createThreeNFTMarker(markerId);
+			markerRoot.add(containerEarth)
+			
+			// markerRoot.add(sphere)
+			arScene.scene.add(markerRoot);
+			
+		});
+
+		var light2	= new THREE.AmbientLight( 0x222222 )
+		arScene.scene.add( light2 )
+		arScene.scene.add( containerEarth )
+		arScene.scene.background = new THREE.Color( 0xff0000 );
+		renderer.setClearColor( 0xffffff, 1);
+
+		console.log('aaaaa',arCamera);
+		var tick = function() {
+			arScene.process();
+			
+			smoke.geometry.verticesNeedUpdate = true;
+				attributesParticle.size.needsUpdate = true;
+				attributesParticle.pcolor.needsUpdate = true;
+
+			arScene.renderOn(renderer);
+			requestAnimationFrame(tick);
+			if(anim){
+				
+			}renderer.setClearColor( 0xffffff, 1);
+
+			arScene.scene.background = new THREE.Color( 0xf0f0f0 );
+			renderer.setClearColor( 0xffffff, 0);
+			
+		};
+
+		tick();
+
+		
+
+	}});
+
+	delete window.ARThreeOnLoad;
+
+
+
+};
+
+if (window.ARController && ARController.getUserMediaThreeScene) {
+	ARThreeOnLoad();
+}
+
+
+function up(){
+	if(containerEarth.scale.x < 800){
+		containerEarth.scale.x += 10;
+		containerEarth.scale.y += 10;
+		containerEarth.scale.z += 10;
+	}
+}
+
+function down(){
+	if(containerEarth.scale.x > 40){
+		containerEarth.scale.x -= 10;
+		containerEarth.scale.y -= 10;
+		containerEarth.scale.z -= 10;
+	}
+}
+
+
+
+function setanim(){
+	if(anim){
+		anim = false;
+	}else{
+		anim = true;
+	}
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<ion-header>
+  <ion-toolbar size="large">
+    <ion-title id="ion-text-center" style='text-align : center' class="philosopher"><b>Sol-AR</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-menu side="end" content-id="content" style='padding-right : 100px; --background : linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/img/pecahan.jpg) no-repeat center center fixed; background-size : cover;' >
+  <ion-header styel='height : 100px;'>
+    <ion-toolbar translucent style='height : 100px;'>
+     <ion-title style='text-align : center; margin-top : 25px; font-weight : bold;'>Pengaturan</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content style='background : linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/img/pecahan.jpg) no-repeat center center fixed; background-size : cover;'>
+    <ion-list style='background : transparent'>
+      <ion-item lines='none' style='--background: radial-gradient(ellipse at bottom, rgba(177, 91, 0, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%);'>Animasi
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Matahari</ion-label>
+        <ion-toggle (ionChange)="detect('matahari')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Merkurius</ion-label>
+        <ion-toggle (ionChange)="detect('merkurius')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Venus</ion-label>
+        <ion-toggle (ionChange)="detect('venus')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Bumi</ion-label>
+        <ion-toggle (ionChange)="detect('bumi')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Mars</ion-label>
+        <ion-toggle (ionChange)="detect('mars')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Jupiter</ion-label>
+        <ion-toggle (ionChange)="detect('jupiter')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Saturnus</ion-label>
+        <ion-toggle (ionChange)="detect('saturnus')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Uranus</ion-label>
+        <ion-toggle (ionChange)="detect('uranus')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Neptunus</ion-label>
+        <ion-toggle (ionChange)="detect('neptunus')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Komet</ion-label>
+        <ion-toggle (ionChange)="detect('komet')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Asteroid</ion-label>
+        <ion-toggle (ionChange)="detect('asteroid')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Bulan</ion-label>
+        <ion-toggle (ionChange)="detect('bulan')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background : transparent; font-size : 16px; z-index : 1000000000'>
+        <ion-label>Tata Surya</ion-label>
+        <ion-toggle (ionChange)="detect('tatasurya')"></ion-toggle>
+      </ion-item>
+      <ion-item lines='none' style='--background: radial-gradient(ellipse at bottom, rgba(177, 91, 0, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%);'>Musik Latar
+      </ion-item>
+      <ion-item lines='none' style='--background: radial-gradient(ellipse at bottom, rgba(177, 91, 0, 0.5) 0%, rgba(	5, 6, 8, 0.5) 100%);'>
+        <ion-range min="0" max="100" step="2" [(ngModel)]='sliderValue' (ionChange)='bgmChange()'>
+          <ion-icon size="small" slot="start" name="volume-off-outline"></ion-icon>
+          <ion-icon slot="end" name="volume-high-outline"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+ 
+</ion-menu>
+
+<ion-content  id='content' [scrollEvents]="true" #content style='--background : url(../../assets/img/bg.jpg)'>
+  <ion-slides [options]="slideOpt" pager="true" (ionSlideDidChange)="swiped($event)">
+    <ion-slide>
+      <ion-card>
+        <img src="../../assets/img/slide1.jpg">
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <img src="../../assets/img/slide2.jpg">
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <img src="../../assets/img/slide3.jpg">
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  
+  <ion-grid no-padding>
+    <!-- <ion-row> -->
+      <!-- <ion-slides [options]="slideOpt" pager="true" (ionSlideDidChange)="swiped($event)" style='z-index : 10000'> -->
+        <ion-row>
+          <div class="card" (click)='play()' [routerLink]="['/sun']">
+            <div id='sun' ></div>
+            <div class="product-info">
+              <h1 class="product-name" >Matahari</h1>
+              <h2 class="product-price" >Pusat sekaligus bintang di tata surya</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Matahari</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/mercury']">
+            <div id='mercury' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Merkurius</h1>
+              <h2 class="product-price" >Merkurius adalah planet terkecil di Tata Surya sekaligus yang terdekat dari Matahari</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Merkurius</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/venus']">
+            <div id='venus' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Venus</h1>
+              <h2 class="product-price" >Venus adalah planet terdekat kedua dari Matahari setelah Merkurius. Planet ini mengorbit Matahari selama 224,7 hari Bumi.</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Venus</h3>
+            </div>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="card" (click)='play()' [routerLink]="['/earth']"> 
+            <div id='earth' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Bumi</h1>
+              <h2 class="product-price" >Bumi adalah planet terbesar dari empat planet kebumian lainnya menurut ukuran dan massa.</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Bumi</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/mars']">
+            <div id='mars' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Mars</h1>
+              <h2 class="product-price" >Mars adalah planet terdekat keempat dari Matahari. Namanya diambil dari dewa perang Romawi, Mars. Planet ini sering dijuluki sebagai "planet merah" karena tampak dari jauh berwarna kemerah-kemerahan</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Mars</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/jupyter']">
+            <div id='jupiter' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Jupiter</h1>
+              <h2 class="product-price" >Jupiter atau Yupiter adalah planet terdekat kelima dari Matahari setelah Merkurius, Venus, Bumi, dan Mars. Planet ini juga merupakan planet terbesar di Tata Surya.</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Jupiter</h3>
+            </div>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="card" (click)='play()' [routerLink]="['/saturn']">
+            <div id='saturn' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Saturnus</h1>
+              <h2 class="product-price" >Saturnus adalah planet keenam dari Matahari dan merupakan planet terbesar kedua di Tata Surya setelah Jupiter.</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Saturnus</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/uranus']">
+            <div id='uranus' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Uranus</h1>
+              <h2 class="product-price" >Uranus adalah planet ketujuh dari Matahari. Uranus merupakan planet yang memiliki jari-jari terbesar ketiga sekaligus massa terbesar keempat di Tata Surya.</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Uranus</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/neptune']">
+            <div id='neptune' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Neptunus</h1>
+              <h2 class="product-price" >eptunus merupakan planet terbesar keempat berdasarkan diameter dan terbesar ketiga berdasarkan massa. </h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Neptunus</h3>
+            </div>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div style='visibility : hidden' class="card" (click)='play()' [routerLink]="['/saturn']">
+            <div id='saturn' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Saturnus</h1>
+              <h2 class="product-price" >Saturnus adalah planet keenam dari Matahari dan merupakan planet terbesar kedua di Tata Surya setelah Jupiter.</h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Saturnus</h3>
+            </div>
+          </div>
+          <div class="card" (click)='play()' [routerLink]="['/moon']">
+            <div id='moon'></div>
+            <div class="product-info">
+              <h1 class="product-name">Bulan</h1>
+              <h2 class="product-price" >eptunus merupakan planet terbesar keempat berdasarkan diameter dan terbesar ketiga berdasarkan massa. </h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Neptunus</h3>
+            </div>
+          </div>
+          <div style='visibility : hidden' class="card" (click)='play()' [routerLink]="['/neptune']">
+            <div id='neptune' ></div>
+            <div class="product-info">
+              <h1 class="product-name">Neptunus</h1>
+              <h2 class="product-price" >eptunus merupakan planet terbesar keempat berdasarkan diameter dan terbesar ketiga berdasarkan massa. </h2>
+              <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Neptunus</h3>
+            </div>
+          </div>
+        </ion-row>
+    <ion-row>
+        <div class="card" (click)='play()' [routerLink]="['/solar']" style='width : 100%; background : rgba(0, 0, 0, 0.8) 300px; height : 50vw;'>
+          <div class="product-image">
+            <div class='solar-syst'>
+              <div class='sun'></div>
+              <div class='mercury'></div>
+              <div class='venus'></div>
+              <div class='earth'></div>
+              <div class='mars'></div>
+              <div class='jupiter'></div>
+              <div class='saturn'></div>
+              <div class='uranus'></div>
+              <div class='neptune'></div>
+              <div class='pluto'></div>
+              <div class='asteroids-belt'></div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h1 class="product-name">Tata Surya</h1>
+            <h2 class="product-price" >Tata surya di mana bumi berada</h2>
+            <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk menampilkan tata surya</h3>
+          </div>
+        </div>
+    </ion-row>
+    <ion-row>
+      <div class="card" (click)='play()' [routerLink]="['/asteroid']">
+        <div id='asteroid'></div>
+        <div class="product-info">
+          <h1 class="product-name">Asteroid</h1>
+          <h2 class="product-price" >Uranus adalah planet ketujuh dari Matahari. Uranus merupakan planet yang memiliki jari-jari terbesar ketiga sekaligus massa terbesar keempat di Tata Surya.</h2>
+          <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Uranus</h3>
+        </div>
+      </div>
+      <div class="card" (click)='play()' [routerLink]="['/meteor']">
+        <div id='meteor'></div>
+        <div class="product-info">
+          <h1 class="product-name">Meteor</h1>
+          <h2 class="product-price" >eptunus merupakan planet terbesar keempat berdasarkan diameter dan terbesar ketiga berdasarkan massa. </h2>
+          <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Neptunus</h3>
+        </div>
+      </div>
+      <div class="card" (click)='play()' [routerLink]="['/komet']">
+        <div id='komet'></div>
+        <div class="product-info">
+          <h1 class="product-name">Komet</h1>
+          <h2 class="product-price" >eptunus merupakan planet terbesar keempat berdasarkan diameter dan terbesar ketiga berdasarkan massa. </h2>
+          <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Neptunus</h3>
+        </div>
+      </div>
+  </ion-row>
+  <ion-row>
+    <div class="card" (click)='play()' [routerLink]="['/tentang']">
+      <div id='tentang'></div>
+      <div class="product-info">
+        <h1 class="product-name">Tentang</h1>
+        <h2 class="product-price" >Uranus adalah planet ketujuh dari Matahari. Uranus merupakan planet yang memiliki jari-jari terbesar ketiga sekaligus massa terbesar keempat di Tata Surya.</h2>
+        <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Uranus</h3>
+      </div>
+    </div>
+    <div class="card" (click)='play()' [routerLink]="['/quiz']">
+      <div id='quiz'></div>
+      <div class="product-info">
+        <h1 class="product-name">Ujian</h1>
+        <h2 class="product-price" >Uranus adalah planet ketujuh dari Matahari. Uranus merupakan planet yang memiliki jari-jari terbesar ketiga sekaligus massa terbesar keempat di Tata Surya.</h2>
+        <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Uranus</h3>
+      </div>
+    </div>
+    <div class="card" (click)='play(); openMenu();' >
+      <div id='setting'></div>
+      <div class="product-info">
+        <h1 class="product-name">Pengaturan</h1>
+        <h2 class="product-price" >eptunus merupakan planet terbesar keempat berdasarkan diameter dan terbesar ketiga berdasarkan massa. </h2>
+        <h3 class="product-slogan" style='color : white; font-size : 17px; text-align : left;'>Tekan untuk memulai AR Neptunus</h3>
+      </div>
+    </div>
+  </ion-row>
+  </ion-grid>
+  
+</ion-content>
